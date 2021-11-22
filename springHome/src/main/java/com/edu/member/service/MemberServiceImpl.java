@@ -27,5 +27,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.memberExist(email, password);
 	}
 
+	@Override
+	public int memberInsertOne(MemberVo memberVo) {
+		
+		return memberDao.memberInsertOne(memberVo);
+	}
+
 	
 }

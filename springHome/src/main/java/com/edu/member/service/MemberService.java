@@ -10,4 +10,6 @@ public interface MemberService {
 
 	public MemberVo memberExist(String email, String password);
 
+	public int memberInsertOne(MemberVo memberVo);
+
 }

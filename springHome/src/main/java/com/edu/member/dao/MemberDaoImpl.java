@@ -10,26 +10,34 @@ import org.springframework.stereotype.Repository;
 import com.edu.member.model.MemberVo;
 
 @Repository
-public class MemberDaoImpl implements MemberDao{
+public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
+	String nameSpace = "com.edu.member.";
+
 	@Override
 	public List<MemberVo> memberSelectList() {
-		
+
 		return sqlSession.selectList("com.edu.member.memberSelectList");
 	}
 
 	@Override
 	public MemberVo memberExist(String email, String password) {
-		
+
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		
+
 		paramMap.put("email", email);
 		paramMap.put("password", password);
-		
+
 		return sqlSession.selectOne("com.edu.member.memberExist", paramMap);
+	}
+
+	@Override
+	public int memberInsertOne(MemberVo memberVo) {
+
+		return sqlSession.insert(nameSpace + "memberInsertOne", memberVo);
 	}
 
 }

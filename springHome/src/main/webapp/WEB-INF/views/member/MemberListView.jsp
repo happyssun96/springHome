@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 목록</title>
+<title>회원목록</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 	
 	<h1>회원목록</h1>
 	<p>
-		<a href="./add/do">신규회원</a>
+		<a href="./add.do">신규회원</a>
 	</p>
 	
 	<c:forEach var="memberVo" items="${memberList}">
