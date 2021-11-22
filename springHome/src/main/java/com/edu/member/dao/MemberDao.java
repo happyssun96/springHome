@@ -8,4 +8,5 @@ public interface MemberDao {
 
 	public List<MemberVo> memberSelectList();
 
+	public MemberVo memberExist(String email, String password);
 }

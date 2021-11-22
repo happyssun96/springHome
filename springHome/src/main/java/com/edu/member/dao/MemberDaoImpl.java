@@ -1,5 +1,6 @@
 package com.edu.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +17,19 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Override
 	public List<MemberVo> memberSelectList() {
+		
 		return sqlSession.selectList("com.edu.member.memberSelectList");
+	}
+
+	@Override
+	public MemberVo memberExist(String email, String password) {
+		
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("email", email);
+		paramMap.put("password", password);
+		
+		return sqlSession.selectOne("com.edu.member.memberExist", paramMap);
 	}
 
 }

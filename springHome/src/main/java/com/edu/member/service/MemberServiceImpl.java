@@ -21,5 +21,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.memberSelectList();
 	}
 
+	@Override
+	public MemberVo memberExist(String email, String password) {
+		
+		return memberDao.memberExist(email, password);
+	}
+
 	
 }

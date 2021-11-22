@@ -19,4 +19,12 @@
 		ORDER BY MNO DESC
 	</select>
 
+	<select id="memberExist" parameterType="map" 
+		resultMap="memberResultMap">
+		SELECT MNAME, EMAIL 
+		FROM MEMBER
+		WHERE EMAIL = #{email} 
+		AND PWD = #{password}
+	</select>
+	
 </mapper>

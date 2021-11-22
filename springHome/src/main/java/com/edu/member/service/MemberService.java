@@ -8,4 +8,6 @@ public interface MemberService {
 
 	public List<MemberVo> memberSelectList();
 
+	public MemberVo memberExist(String email, String password);
+
 }
