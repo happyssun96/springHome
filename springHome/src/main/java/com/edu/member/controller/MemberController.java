@@ -17,7 +17,8 @@ import com.edu.member.service.MemberService;
 
 @Controller
 public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = 
+			LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
 	private MemberService memberService;
@@ -32,8 +33,10 @@ public class MemberController {
 
 	// 로그인 버튼 클릭 시
 	@RequestMapping(value = "/loginCtr.do", method = RequestMethod.POST)
-	public String loginCtr(String email, String password, HttpSession session, Model model) {
-		logger.info("Welcome MemberController! loginCtr!" + email + ", " + password);
+	public String loginCtr(String email, String password, 
+			HttpSession session, Model model) {
+		logger.info("Welcome MemberController! loginCtr!" + email + ", "
+			+ password);
 
 		MemberVo memberVo = memberService.memberExist(email, password);
 
@@ -47,6 +50,16 @@ public class MemberController {
 			return "/auth/LoginFail";
 		}
 
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public String logout(HttpSession session, Model model) {
+		logger.info("Welcome MemberController! logout");
+
+		session.invalidate();
+
+		return "redirect:/login.do";
 	}
 
 	// 회원 리스트 화면으로
@@ -75,6 +88,28 @@ public class MemberController {
 		logger.info("Welcome MemberController! memberAdd" + memberVo);
 
 		memberService.memberInsertOne(memberVo);
+
+		return "redirect:/member/list.do";
+	}
+
+	// 회원수정 화면으로
+	@RequestMapping(value = "/member/update.do", method = RequestMethod.GET)
+	public String memberUpdate(int no, Model model) {
+		logger.info("Welcome MemberController! memberUpdate" + no);
+
+		MemberVo memberVo = memberService.memberSelectOne(no);
+
+		model.addAttribute("memberVo", memberVo);
+
+		return "member/MemberUpdateForm";
+	}
+
+	// 회원수정
+	@RequestMapping(value = "/member/updateCtr.do", method = RequestMethod.POST)
+	public String memberUpdate(MemberVo memberVo, Model model) {
+		logger.info("Welcome MemberController! memberUpdateCtr" + memberVo);
+
+		memberService.memberUpdateOne(memberVo);
 
 		return "redirect:/member/list.do";
 	}

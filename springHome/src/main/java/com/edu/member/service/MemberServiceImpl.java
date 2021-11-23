@@ -33,5 +33,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.memberInsertOne(memberVo);
 	}
 
+	@Override
+	public int memberUpdateOne(MemberVo memberVo) {
+		
+		return memberDao.memberUpdateOne(memberVo);
+	}
+
+	@Override
+	public MemberVo memberSelectOne(int no) {
+		
+		return memberDao.memberSelectOne(no);
+	}
 	
 }

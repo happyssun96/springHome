@@ -37,4 +37,18 @@
    
    </insert>
 
+	<select id="memberSelectOne" parameterType="int" 
+	  resultMap="memberResultMap">
+	  SELECT MNO, MNAME, EMAIL, CRE_DATE 
+	  FROM MEMBER 
+      WHERE MNO = #{no}
+	</select>
+   
+   <update id="memberUpdateOne" parameterType="memberVo">
+	  UPDATE MEMBER 
+	  SET MNAME= #{name}, EMAIL = #{email}, 
+	  PWD = #{password}, MOD_DATE = SYSDATE
+	  WHERE MNO = #{no}
+   </update>
+
 </mapper>

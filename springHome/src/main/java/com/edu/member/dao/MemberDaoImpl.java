@@ -40,4 +40,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.insert(nameSpace + "memberInsertOne", memberVo);
 	}
 
+	@Override
+	public int memberUpdateOne(MemberVo memberVo) {
+		
+		return sqlSession.update(nameSpace + "memberUpdateOne", memberVo);
+	}
+
+	@Override
+	public MemberVo memberSelectOne(int no) {
+		
+		return sqlSession.selectOne(nameSpace + "memberSelectOne", no);
+	}
+
 }

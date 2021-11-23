@@ -10,7 +10,7 @@
 	<c:if test="${sessionScope.member.email ne null}">
 		<span style="float: right;">
 			${member.name}
-			<a href="<%=request.getContextPath()%>"
+			<a href="<%=request.getContextPath()%>/logout.do"
 			style="color: white;">로그아웃</a>
 		</span>
 		
