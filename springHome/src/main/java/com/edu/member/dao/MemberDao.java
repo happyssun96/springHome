@@ -16,4 +16,6 @@ public interface MemberDao {
 	
 	public int memberUpdateOne(MemberVo memberVo);
 	
+	public void memberDeleteOne(int no);
+	
 }

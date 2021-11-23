@@ -44,5 +44,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberDao.memberSelectOne(no);
 	}
+
+	@Override
+	public void memberDeleteOne(int no) {
+		
+		memberDao.memberDeleteOne(no);
+		
+	}
 	
 }

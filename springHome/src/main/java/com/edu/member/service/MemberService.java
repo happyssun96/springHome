@@ -15,4 +15,6 @@ public interface MemberService {
 	public MemberVo memberSelectOne(int no);
 
 	public int memberUpdateOne(MemberVo memberVo);
+
+	public void memberDeleteOne(int no);
 }

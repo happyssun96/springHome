@@ -42,14 +42,20 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int memberUpdateOne(MemberVo memberVo) {
-		
+
 		return sqlSession.update(nameSpace + "memberUpdateOne", memberVo);
 	}
 
 	@Override
 	public MemberVo memberSelectOne(int no) {
-		
+
 		return sqlSession.selectOne(nameSpace + "memberSelectOne", no);
+	}
+
+	@Override
+	public void memberDeleteOne(int no) {
+
+		sqlSession.delete(nameSpace + "memberDeleteOne", no);
 	}
 
 }

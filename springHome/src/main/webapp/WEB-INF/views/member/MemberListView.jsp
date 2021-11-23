@@ -21,7 +21,7 @@
 		<a href='./update.do?no=${memberVo.no}'>${memberVo.name}</a>,
 		${memberVo.email},
 		${memberVo.createDate}
-		<a href='./delete.do?no=${memberVo.no}'>[삭제]</a><br/>
+		<a href='./deleteCtr.do?no=${memberVo.no}'>[삭제]</a><br/>
 		
 	</c:forEach>
 	

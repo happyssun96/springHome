@@ -11,8 +11,8 @@
 		location.href = './list.do';
 	}
 	
-	function pageMoveDeleteFnc() {
-		var url = './delete.do?no=' + no;
+	function pageMoveDeleteFnc(no) {
+		var url = './deleteCtr.do?no=' + no;
 		location.href = url;
 	}
 </script>
@@ -36,7 +36,7 @@
 					pattern="yyyy-MM-dd hh:mm"/><br/>
 			   <input type="submit" value="수정">
 			   <input type="button" value="삭제"
-			   		onclick="pageMoveDeleteFnc(${memberVo.no}),">
+			   		onclick="pageMoveDeleteFnc(${memberVo.no})">
 			   <input type="button" value="뒤로가기" 
 			   		onclick="pageMoveListFnc();">
 	</form>

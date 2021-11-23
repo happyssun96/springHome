@@ -17,8 +17,7 @@ import com.edu.member.service.MemberService;
 
 @Controller
 public class MemberController {
-	private static final Logger logger = 
-			LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
 	private MemberService memberService;
@@ -33,10 +32,8 @@ public class MemberController {
 
 	// 로그인 버튼 클릭 시
 	@RequestMapping(value = "/loginCtr.do", method = RequestMethod.POST)
-	public String loginCtr(String email, String password, 
-			HttpSession session, Model model) {
-		logger.info("Welcome MemberController! loginCtr!" + email + ", "
-			+ password);
+	public String loginCtr(String email, String password, HttpSession session, Model model) {
+		logger.info("Welcome MemberController! loginCtr!" + email + ", " + password);
 
 		MemberVo memberVo = memberService.memberExist(email, password);
 
@@ -95,7 +92,7 @@ public class MemberController {
 	// 회원수정 화면으로
 	@RequestMapping(value = "/member/update.do", method = RequestMethod.GET)
 	public String memberUpdate(int no, Model model) {
-		logger.info("Welcome MemberController! memberUpdate" + no);
+		logger.info("Welcome MemberController! memberUpdate no" + no);
 
 		MemberVo memberVo = memberService.memberSelectOne(no);
 
@@ -110,6 +107,16 @@ public class MemberController {
 		logger.info("Welcome MemberController! memberUpdateCtr" + memberVo);
 
 		memberService.memberUpdateOne(memberVo);
+
+		return "redirect:/member/list.do";
+	}
+
+	// 회원탈퇴
+	@RequestMapping(value = "/member/deleteCtr.do", method = RequestMethod.GET)
+	public String memberDeleteCtr(int no, Model model) {
+		logger.info("Welcome MemberController! memberDeleteCtr no: " + no);
+
+		memberService.memberDeleteOne(no);
 
 		return "redirect:/member/list.do";
 	}
