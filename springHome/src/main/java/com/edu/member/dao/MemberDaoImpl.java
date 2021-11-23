@@ -20,7 +20,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<MemberVo> memberSelectList() {
 
-		return sqlSession.selectList("com.edu.member.memberSelectList");
+		return sqlSession.selectList(nameSpace + "memberSelectList");
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class MemberDaoImpl implements MemberDao {
 		paramMap.put("email", email);
 		paramMap.put("password", password);
 
-		return sqlSession.selectOne("com.edu.member.memberExist", paramMap);
+		return sqlSession.selectOne(nameSpace + "memberExist", paramMap);
 	}
 
 	@Override
