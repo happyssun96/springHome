@@ -1,6 +1,8 @@
 package com.edu.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.edu.member.model.MemberVo;
 import com.edu.member.service.MemberService;
+import com.edu.util.Paging;
 
 @Controller
 public class MemberController {
@@ -59,14 +62,28 @@ public class MemberController {
 		return "redirect:/login.do";
 	}
 
-	// 회원 리스트 화면으로
-	@RequestMapping(value = "/member/list.do", method = RequestMethod.GET)
+	// 회원목록 화면으로
+	@RequestMapping(value = "/member/list.do", method = {RequestMethod.GET, 
+			RequestMethod.POST})
 	public String memberList(Model model) {
 		logger.info("Welcome MemberController! memberList");
+		
+		int totalCount = memberService.memberSelectTotalCount();
 
-		List<MemberVo> memberList = memberService.memberSelectList();
+		// 페이지 나누기 관련 처리
+		Paging memberPaging = new Paging(totalCount, 1);
+		int start = memberPaging.getPageBegin();
+		int end = memberPaging.getPageEnd();
+		
+		List<MemberVo> memberList = 
+				memberService.memberSelectList(start, end);
 
+		Map<String, Object> pagingMap = new HashMap<String, Object>();
+		pagingMap.put("totalCount", totalCount);
+		pagingMap.put("memberPaging", memberPaging);
+		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("pagingMap", pagingMap);
 
 		return "member/MemberListView";
 	}

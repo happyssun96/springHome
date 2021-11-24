@@ -8,6 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>회원목록</title>
+
+<style type="text/css">
+table, tr, td, th {
+	border : 1px solid black;		
+}
+
+table {
+	border-collapse: collapse;
+}
+</style>
 </head>
 
 <body>
@@ -17,7 +27,7 @@
 	<p>
 		<a href="./add.do">신규회원</a>
 	</p>
-	<table border="5">
+	<table>
 		<tr>
 			<th>번호</th>
 			<th>이름</th>
@@ -30,13 +40,25 @@
 				<td>${memberVo.no}</td>
 				<td><a href='./update.do?no=${memberVo.no}'>${memberVo.name}</a></td>
 				<td>${memberVo.email}</td>
-				<td>${memberVo.createDate}</td>
+				<td><fmt:formatDate value="${memberVo.createDate}"
+						pattern="YYYY-MM-dd hh:mm" />
+				</td>
 				<td><a href='./deleteCtr.do?no=${memberVo.no}'>[삭제]</a></td>
 			</tr>
 		</c:forEach>
 
 	</table>
 
+	<jsp:include page="/WEB-INF/views/common/Paging.jsp">
+		<jsp:param value="${pagingMap}" name="pagingMap"/>
+	</jsp:include>
+
+	<form action="./list.do" id='pagingForm' method="post">
+		<input type="hidden" id='curPage' name='curPage'
+			value="${pagingMap.memberPaging.curPage}">
+	</form>
+	
 	<jsp:include page="/WEB-INF/views/Tail.jsp" />
+	
 </body>
 </html>

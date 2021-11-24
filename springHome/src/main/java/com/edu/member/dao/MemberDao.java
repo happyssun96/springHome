@@ -5,8 +5,8 @@ import java.util.List;
 import com.edu.member.model.MemberVo;
 
 public interface MemberDao {
-
-	public List<MemberVo> memberSelectList();
+	
+	public List<MemberVo> memberSelectList(int start, int end);
 
 	public MemberVo memberExist(String email, String password);
 	
@@ -18,4 +18,5 @@ public interface MemberDao {
 	
 	public void memberDeleteOne(int no);
 	
+	public int memberSelectTotalCount();
 }

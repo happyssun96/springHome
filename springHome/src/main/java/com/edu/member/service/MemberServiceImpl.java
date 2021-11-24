@@ -16,9 +16,9 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDao memberDao;
 	
 	@Override
-	public List<MemberVo> memberSelectList() {
+	public List<MemberVo> memberSelectList(int start, int end) {
 		
-		return memberDao.memberSelectList();
+		return memberDao.memberSelectList(start, end);
 	}
 
 	@Override
@@ -51,5 +51,10 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.memberDeleteOne(no);
 		
 	}
-	
+
+	@Override
+	public int memberSelectTotalCount() {
+		
+		return memberDao.memberSelectTotalCount();
+	}	
 }
