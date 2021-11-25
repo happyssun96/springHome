@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Paging implements Serializable {
 
-	// 페이지당 게시물 수
-	public static final int PAGE_SCALE = 10;
+	// 페이지당 게시물 수(블록 하나 당 게시물 10개씩 출력)
+	public static final int PAGE_SCALE = 4;
 
 	// 화면당 페이지 수
-	public static final int BLOCK_SCALE = 10;
+	public static final int BLOCK_SCALE = 5;
 
 	// 현재 페이지 위치
 	private int curPage = 0;

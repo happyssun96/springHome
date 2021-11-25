@@ -32,6 +32,13 @@ nav>ul>li>a:hover {
 	background-color: #5D5D5D;
 	font-weight: bold;
 }
+
+.active {
+	color : #FFD9EC;
+	background-color : #5D5D5D;
+	font-weight : bold;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -40,15 +47,17 @@ nav>ul>li>a:hover {
 		var curPage = document.getElementById('curPage');
 		curPage.value = pageNumber;
 		
-		var pagingForm = document.getElementById('paging');
-		pagingForm.submit;
+		var pagingForm = document.getElementById('pagingForm');
+		pagingForm.submit();
 	}
 	
 	window.onload = function() {
 		var curPageDoc = document.getElementById('curPage');
-		var id = '#pageButton' + curPagedoc.value;
+		var id = 'pageButton' + curPageDoc.value;
 		
-		// 클래스 추가 예정
+		var curPageObj = document.getElementById(id);
+		curPageObj.setAttribute('class', 'active');
+		
 	}
 	
 </script>

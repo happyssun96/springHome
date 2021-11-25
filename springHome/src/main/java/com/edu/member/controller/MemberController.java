@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.member.model.MemberVo;
 import com.edu.member.service.MemberService;
@@ -65,13 +66,14 @@ public class MemberController {
 	// 회원목록 화면으로
 	@RequestMapping(value = "/member/list.do", method = {RequestMethod.GET, 
 			RequestMethod.POST})
-	public String memberList(Model model) {
+	public String memberList(@RequestParam(defaultValue = "1") int curPage, 
+			Model model) {
 		logger.info("Welcome MemberController! memberList");
 		
 		int totalCount = memberService.memberSelectTotalCount();
 
 		// 페이지 나누기 관련 처리
-		Paging memberPaging = new Paging(totalCount, 1);
+		Paging memberPaging = new Paging(totalCount, curPage);
 		int start = memberPaging.getPageBegin();
 		int end = memberPaging.getPageEnd();
 		
