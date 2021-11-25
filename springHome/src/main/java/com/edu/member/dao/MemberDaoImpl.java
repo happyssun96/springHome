@@ -19,10 +19,13 @@ public class MemberDaoImpl implements MemberDao {
 	String nameSpace = "com.edu.member.";
 	
 	@Override
-	public List<MemberVo> memberSelectList(int start, int end) {
+	public List<MemberVo> memberSelectList(String keyword, 
+			int start, int end) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
 		map.put("start", start);
 		map.put("end", end);
+		
 		return sqlSession.selectList(nameSpace + "memberSelectList", map);
 	}
 

@@ -67,8 +67,9 @@ public class MemberController {
 	@RequestMapping(value = "/member/list.do", method = {RequestMethod.GET, 
 			RequestMethod.POST})
 	public String memberList(@RequestParam(defaultValue = "1") int curPage, 
-			Model model) {
-		logger.info("Welcome MemberController! memberList");
+			@RequestParam(defaultValue = "") String keyword, Model model) {
+		logger.info("Welcome MemberController! memberList keyword : {}",
+				keyword);
 		
 		int totalCount = memberService.memberSelectTotalCount();
 
@@ -78,13 +79,17 @@ public class MemberController {
 		int end = memberPaging.getPageEnd();
 		
 		List<MemberVo> memberList = 
-				memberService.memberSelectList(start, end);
+				memberService.memberSelectList(keyword, start, end);
 
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("keyword", keyword);
+		
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		pagingMap.put("totalCount", totalCount);
 		pagingMap.put("memberPaging", memberPaging);
 		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("searchMap", searchMap);
 		model.addAttribute("pagingMap", pagingMap);
 
 		return "member/MemberListView";

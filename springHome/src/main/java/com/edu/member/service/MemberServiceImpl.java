@@ -16,9 +16,9 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDao memberDao;
 	
 	@Override
-	public List<MemberVo> memberSelectList(int start, int end) {
+	public List<MemberVo> memberSelectList(String keyword, int start, int end) {
 		
-		return memberDao.memberSelectList(start, end);
+		return memberDao.memberSelectList(keyword, start, end);
 	}
 
 	@Override

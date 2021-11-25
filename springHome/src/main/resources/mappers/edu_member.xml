@@ -26,11 +26,12 @@
 		SELECT MEMBER.RNUM, MEMBER.MNO, MEMBER.MNAME, MEMBER.EMAIL,
 		MEMBER.CRE_DATE
 		FROM ( SELECT ROWNUM RNUM, M.MNO, M.MNAME, M.EMAIL, M.CRE_DATE
-		FROM (SELECT MNO, MNAME, EMAIL, CRE_DATE
-		FROM MEMBER
-		ORDER BY CRE_DATE) M
-		) MEMBER
-		WHERE MEMBER.RNUM BETWEEN #{start} AND #{end}
+			FROM ( SELECT MNO, MNAME, EMAIL, CRE_DATE
+				FROM MEMBER
+				WHERE MNAME LIKE '%'||#{keyword}||'%'
+				ORDER BY CRE_DATE DESC) M
+			) MEMBER
+			WHERE MEMBER.RNUM BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="memberExist" parameterType="map"
@@ -71,9 +72,10 @@
 		DELETE FROM MEMBER
 		WHERE MNO = #{value}
 	</delete>
-	
-	<select id="memberSelectTotalCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) 
+
+	<select id="memberSelectTotalCount"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
 		FROM MEMBER
 	</select>
 

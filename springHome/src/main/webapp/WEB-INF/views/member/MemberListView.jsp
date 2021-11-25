@@ -27,6 +27,20 @@ table {
 	<p>
 		<a href="./add.do">신규회원</a>
 	</p>
+	
+	<form id='pagingForm' action="./list.do" method="post">
+		<select name='searchOption'>
+			<option value="all">전체</option>
+			<option value="name">이름</option>
+			<option value="email">이메일</option>
+		</select>
+		
+		<input type="text" name="keyword" value="${searchMap.keyword}">
+		
+		<input type="hidden" id='curPage' name='curPage'
+			value="${pagingMap.memberPaging.curPage}">
+	</form>
+	
 	<table>
 		<tr>
 			<th>번호</th>
@@ -52,11 +66,6 @@ table {
 	<jsp:include page="/WEB-INF/views/common/Paging.jsp">
 		<jsp:param value="${pagingMap}" name="pagingMap"/>
 	</jsp:include>
-
-	<form action="./list.do" id='pagingForm' method="post">
-		<input type="hidden" id='curPage' name='curPage'
-			value="${pagingMap.memberPaging.curPage}">
-	</form>
 	
 	<jsp:include page="/WEB-INF/views/Tail.jsp" />
 	
