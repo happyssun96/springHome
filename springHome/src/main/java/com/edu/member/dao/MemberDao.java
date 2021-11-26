@@ -6,7 +6,8 @@ import com.edu.member.model.MemberVo;
 
 public interface MemberDao {
 	
-	public List<MemberVo> memberSelectList(String keyword, int start, int end);
+	public List<MemberVo> memberSelectList(String searchOption, 
+			String keyword, int start, int end);
 
 	public MemberVo memberExist(String email, String password);
 	

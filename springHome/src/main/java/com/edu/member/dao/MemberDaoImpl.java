@@ -17,15 +17,16 @@ public class MemberDaoImpl implements MemberDao {
 	SqlSessionTemplate sqlSession;
 
 	String nameSpace = "com.edu.member.";
-	
+
 	@Override
-	public List<MemberVo> memberSelectList(String keyword, 
-			int start, int end) {
+	public List<MemberVo> memberSelectList(String searchOption, 
+			String keyword, int start, int end) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		map.put("start", start);
 		map.put("end", end);
-		
+
 		return sqlSession.selectList(nameSpace + "memberSelectList", map);
 	}
 
@@ -66,10 +67,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int memberSelectTotalCount() {
-		
+
 		return sqlSession.selectOne(nameSpace + "memberSelectTotalCount");
 	}
-
-	
 
 }

@@ -64,30 +64,32 @@ public class MemberController {
 	}
 
 	// 회원목록 화면으로
-	@RequestMapping(value = "/member/list.do", method = {RequestMethod.GET, 
-			RequestMethod.POST})
-	public String memberList(@RequestParam(defaultValue = "1") int curPage, 
-			@RequestParam(defaultValue = "") String keyword, Model model) {
-		logger.info("Welcome MemberController! memberList keyword : {}",
-				keyword);
-		
+	@RequestMapping(value = "/member/list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String memberList(@RequestParam(defaultValue = "1") int curPage,
+			@RequestParam(defaultValue = "") String keyword, 
+			@RequestParam(defaultValue = "all") String searchOption, 
+			Model model) {
+		logger.info("Welcome MemberController! memberList searchOption : {}, "
+				+ "keyword : {}", searchOption, keyword);
+
 		int totalCount = memberService.memberSelectTotalCount();
 
 		// 페이지 나누기 관련 처리
 		Paging memberPaging = new Paging(totalCount, curPage);
 		int start = memberPaging.getPageBegin();
 		int end = memberPaging.getPageEnd();
-		
-		List<MemberVo> memberList = 
-				memberService.memberSelectList(keyword, start, end);
+
+		List<MemberVo> memberList = memberService.memberSelectList(
+				searchOption, keyword, start, end);
 
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("keyword", keyword);
-		
+		searchMap.put("searchOption", searchOption);
+
 		Map<String, Object> pagingMap = new HashMap<String, Object>();
 		pagingMap.put("totalCount", totalCount);
 		pagingMap.put("memberPaging", memberPaging);
-		
+
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("searchMap", searchMap);
 		model.addAttribute("pagingMap", pagingMap);
