@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>회원등록</title>
 </head>
+<script type="text/javascript">
+	function goBack(){
+    	window.history.back();
+ }
+</script>
 
 <body>
 	
@@ -19,8 +24,10 @@
 		암호:	   <input type="password" name="password"><br/>
 			   <input type="submit" value="회원추가">
 			   <input type="reset" value="취소">
+			   <input type="button" value="뒤로가기" onclick="goBack();">
+			   
 	</form>
-	
+
 	<jsp:include page="/WEB-INF/views/Tail.jsp" />
 	
 </body>

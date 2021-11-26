@@ -29,12 +29,12 @@ table {
 	
 	<form id='pagingForm' action="./list.do" method="post">
 		<select name='searchOption'>
-			<option value="all" ${searchMap.searchOption == 'all' ? 
-			'selected' : '' }>전체</option>
-			<option value="name" ${searchMap.searchOption == 'name' ? 
-			'selected' : '' }>이름</option>
-			<option value="email" ${searchMap.searchOption == 'email' ? 
-			'selected' : '' }>이메일</option>
+			<option value="all" ${searchMap.searchOption 
+				== 'all' ? 'selected' : '' }>전체</option>
+			<option value="name" ${searchMap.searchOption 
+				== 'name' ? 'selected' : '' }>이름</option>
+			<option value="email" ${searchMap.searchOption 
+				== 'email' ? 'selected' : '' }>이메일</option>
 		</select>
 		
 		<input type="text" name="keyword" value="${searchMap.keyword}">
