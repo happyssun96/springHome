@@ -36,8 +36,7 @@ public class MemberController {
 
 	// 로그인 버튼 클릭 시
 	@RequestMapping(value = "/loginCtr.do", method = RequestMethod.POST)
-	public String loginCtr(String email, String password, HttpSession session, 
-			Model model) {
+	public String loginCtr(String email, String password, HttpSession session, Model model) {
 		logger.info("Welcome MemberController! loginCtr!" + email + ", " + password);
 
 		MemberVo memberVo = memberService.memberExist(email, password);
@@ -65,30 +64,25 @@ public class MemberController {
 	}
 
 	// 회원목록 화면으로
-	@RequestMapping(value = "/member/list.do", method = { RequestMethod.GET, 
-			RequestMethod.POST })
+	@RequestMapping(value = "/member/list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String memberList(@RequestParam(defaultValue = "1") int curPage,
-			@RequestParam(defaultValue = "") String keyword, 
-			@RequestParam(defaultValue = "all") String searchOption, 
+			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "all") String searchOption,
 			Model model) {
-		logger.info("Welcome MemberController! memberList searchOption : {}, "
-				+ "keyword : {}", searchOption, keyword);
+		logger.info("Welcome MemberController! memberList searchOption : {}, " + "keyword : {}", searchOption, keyword);
 
-		int totalCount = memberService.memberSelectTotalCount(keyword, 
-				searchOption);
+		int totalCount = memberService.memberSelectTotalCount(keyword, searchOption);
 
 		// 검색했을 때 1페이지로 넘어가게 구현
-		if((totalCount / Paging.PAGE_SCALE)  < curPage - 1) {
+		if ((totalCount / Paging.PAGE_SCALE) < curPage - 1) {
 			curPage = 1;
 		}
-		
+
 		// 페이지 나누기 관련 처리
 		Paging memberPaging = new Paging(totalCount, curPage);
 		int start = memberPaging.getPageBegin();
 		int end = memberPaging.getPageEnd();
 
-		List<MemberVo> memberList = memberService.memberSelectList(
-				searchOption, keyword, start, end);
+		List<MemberVo> memberList = memberService.memberSelectList(searchOption, keyword, start, end);
 
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("keyword", keyword);
@@ -141,9 +135,14 @@ public class MemberController {
 		logger.info("Welcome MemberController! memberUpdateCtr" + memberVo);
 
 		memberService.memberUpdateOne(memberVo);
-		
-		session.setAttribute("member", memberVo);
 
+		if (session.getAttribute("member") != null) {
+			MemberVo tempVo = (MemberVo) session.getAttribute("member");
+			if (memberVo.getNo() == tempVo.getNo()) {
+				session.setAttribute("member", 
+						memberService.memberSelectOne(memberVo.getNo()));
+			}
+		}
 		return "redirect:/member/list.do";
 	}
 
