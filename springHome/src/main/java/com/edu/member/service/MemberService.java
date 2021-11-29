@@ -19,5 +19,5 @@ public interface MemberService {
 
 	public void memberDeleteOne(int no);
 	
-	public int memberSelectTotalCount();
+	public int memberSelectTotalCount(String keyword, String searchOption);
 }

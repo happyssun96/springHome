@@ -24,7 +24,8 @@ table {
 
 	<h1>회원목록</h1>
 	<p>
-		<a href="./add.do">신규회원</a>
+		<a href="./add.do">신규회원</a><br/>
+		<a href="./list.do">전체 회원 조회</a>
 	</p>
 	
 	<form id='pagingForm' action="./list.do" method="post">

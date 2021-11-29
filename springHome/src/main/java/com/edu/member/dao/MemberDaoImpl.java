@@ -66,9 +66,12 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int memberSelectTotalCount() {
-
-		return sqlSession.selectOne(nameSpace + "memberSelectTotalCount");
+	public int memberSelectTotalCount(String keyword, String searchOption) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne(nameSpace + "memberSelectTotalCount", map);
 	}
 
 }

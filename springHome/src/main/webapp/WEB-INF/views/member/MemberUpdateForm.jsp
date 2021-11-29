@@ -28,10 +28,11 @@
 	<form action="./updateCtr.do" method="post">
 		번호:   <input type="text" name='no' value='${memberVo.no}'
 					readonly="readonly"><br/>
-		이름:   <input type="text" name="name" value="${memberVo.name}"><br/>
+		이름:   <input type="text" name="name" value="${memberVo.name}" 
+					required><br/>
 		이메일:  <input type="text" name="email"
-					value="${memberVo.email}"><br/>
-		암호:	   <input type="password" name="password"><br/>
+					value="${memberVo.email}" required><br/>
+		암호:	   <input type="password" name="password" required><br/>
 		가입일:  <fmt:formatDate 
 					value="${requestScope.memberVo.createDate}" 
 					pattern="yyyy-MM-dd hh:mm"/><br/>

@@ -19,9 +19,9 @@
 	<h1>회원등록</h1>
 	
 	<form action="./addCtr.do" method="post">
-		이름:   <input type="text" name="name"><br/>
-		이메일:  <input type="text" name="email"><br/>
-		암호:	   <input type="password" name="password"><br/>
+		이름:   <input type="text" name="name" required><br/>
+		이메일:  <input type="text" name="email" required><br/>
+		암호:	   <input type="password" name="password" required><br/>
 			   <input type="submit" value="회원추가">
 			   <input type="reset" value="취소">
 			   <input type="button" value="뒤로가기" onclick="goBack();">

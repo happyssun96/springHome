@@ -36,7 +36,8 @@ public class MemberController {
 
 	// 로그인 버튼 클릭 시
 	@RequestMapping(value = "/loginCtr.do", method = RequestMethod.POST)
-	public String loginCtr(String email, String password, HttpSession session, Model model) {
+	public String loginCtr(String email, String password, HttpSession session, 
+			Model model) {
 		logger.info("Welcome MemberController! loginCtr!" + email + ", " + password);
 
 		MemberVo memberVo = memberService.memberExist(email, password);
@@ -64,7 +65,8 @@ public class MemberController {
 	}
 
 	// 회원목록 화면으로
-	@RequestMapping(value = "/member/list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/member/list.do", method = { RequestMethod.GET, 
+			RequestMethod.POST })
 	public String memberList(@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(defaultValue = "") String keyword, 
 			@RequestParam(defaultValue = "all") String searchOption, 
@@ -72,8 +74,14 @@ public class MemberController {
 		logger.info("Welcome MemberController! memberList searchOption : {}, "
 				+ "keyword : {}", searchOption, keyword);
 
-		int totalCount = memberService.memberSelectTotalCount();
+		int totalCount = memberService.memberSelectTotalCount(keyword, 
+				searchOption);
 
+		// 검색했을 때 1페이지로 넘어가게 구현
+		if((totalCount / Paging.PAGE_SCALE)  < curPage - 1) {
+			curPage = 1;
+		}
+		
 		// 페이지 나누기 관련 처리
 		Paging memberPaging = new Paging(totalCount, curPage);
 		int start = memberPaging.getPageBegin();
@@ -112,7 +120,7 @@ public class MemberController {
 
 		memberService.memberInsertOne(memberVo);
 
-		return "redirect:/member/list.do";
+		return "redirect:/login.do";
 	}
 
 	// 회원수정 화면으로
@@ -129,10 +137,12 @@ public class MemberController {
 
 	// 회원수정
 	@RequestMapping(value = "/member/updateCtr.do", method = RequestMethod.POST)
-	public String memberUpdate(MemberVo memberVo, Model model) {
+	public String memberUpdate(HttpSession session, MemberVo memberVo, Model model) {
 		logger.info("Welcome MemberController! memberUpdateCtr" + memberVo);
 
 		memberService.memberUpdateOne(memberVo);
+		
+		session.setAttribute("member", memberVo);
 
 		return "redirect:/member/list.do";
 	}
@@ -144,6 +154,6 @@ public class MemberController {
 
 		memberService.memberDeleteOne(no);
 
-		return "redirect:/member/list.do";
+		return "redirect:/login.do";
 	}
 }

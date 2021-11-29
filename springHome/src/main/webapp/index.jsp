@@ -7,16 +7,23 @@
 <title>Hello Spring</title>
 <style type="text/css">
 
-#logIn {
+#simpleLoginForm {
 	margin-top: 20px;
 }
 </style>
+
+<script type="text/javascript">
+	function loginMoveFnc() {
+		var formObj = document.getElementById('simpleLoginForm');
+		formObj.submit();
+	}
+</script>
 </head>
 <body>
-	<div>Hello Spring Projects..</div>
+	Hello Spring Projects..
 	
-	<div id="logIn">
-		<input type="button" value="로그인" onclick="location.href='./login.do'">
-	</div>
+	<form action="login.do" id='simpleLoginForm' method="get">
+		<input type="button" value="로그인 화면으로 이동" onclick="loginMoveFnc();">	
+	</form>
 </body>
 </html>
