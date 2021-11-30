@@ -74,10 +74,5 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(nameSpace + "memberSelectTotalCount", map);
 	}
 
-	@Override
-	public MemberVo memberSelectDetail(int no) {
-		
-		return sqlSession.selectOne(nameSpace + "memberSelectDetail" + no);
-	}
 
 }

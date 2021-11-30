@@ -19,9 +19,18 @@ table {
 </style>
 
 <script type="text/javascript">
-// 	function deleteConfirm() {
-// 		return confirm("정말로 삭제하시겠습니까?");
-// 	}
+	function pageMoveDeleteFnc(no) {
+		if(confirm("삭제하시겠습니까?")){
+			alert("삭제를 완료하였습니다!")
+			var url = './deleteCtr.do?no=' + no;
+			location.href = url;
+			return true;
+	} else {
+		alert("취소하였습니다.")
+		return false;
+	}
+	
+}
 </script>
 </head>
 
@@ -64,12 +73,11 @@ table {
 				<td>${memberVo.no}</td>
 				<td><a href='./detail.do?no=${memberVo.no}'>${memberVo.name}</a></td>
 				<td>${memberVo.email}</td>
-				<td><fmt:formatDate value="${memberVo.createDate}"
-						pattern="YYYY-MM-dd hh:mm" />
+				<td>${memberVo.createDate}
 				</td>
 				<td><a href='./update.do?no=${memberVo.no}'>[수정]</a></td>
-				<td><a href='./deleteCtr.do?no=${memberVo.no}'
-						onclick="deleteConfirm();">[삭제]</a></td>
+				<td><a href='#' 
+						onclick="pageMoveDeleteFnc(${memberVo.no})">[삭제]</a></td>
 			</tr>
 		</c:forEach>
 

@@ -8,14 +8,15 @@ public class MemberVo {
 	private String name = "";
 	private String email = "";
 	private String password = "";
-	private Date createDate = null;
-	private Date modifyDate = null;
+	private String createDate = null;
+	private String modifyDate = null;
 
 	public MemberVo() {
 		super();
 	}
 
-	public MemberVo(int no, String name, String email, String password, Date createDate, Date modifyDate) {
+	public MemberVo(int no, String name, String email, String password, 
+			String createDate, String modifyDate) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -57,25 +58,26 @@ public class MemberVo {
 		this.password = password;
 	}
 
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", createDate="
+		return "MemberVo [no=" + no + ", name=" + name + ", email=" + email + ","
+				+ "password=" + password + ", createDate="
 				+ createDate + ", modifyDate=" + modifyDate + "]";
 	}
 

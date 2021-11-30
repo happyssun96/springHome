@@ -21,5 +21,5 @@ public interface MemberService {
 	
 	public int memberSelectTotalCount(String keyword, String searchOption);
 
-	public MemberVo memberSelectDetail(int no);
+	//public MemberVo memberSelectDetail(int no);
 }

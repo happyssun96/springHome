@@ -8,10 +8,8 @@
 		<result column="MNAME" property="name" />
 		<result column="EMAIL" property="email" />
 		<result column="PWD" property="password" />
-		<result column="CRE_DATE" property="createDate"
-			javaType="java.util.Date" />
-		<result column="MOD_DATE" property="modifyDate"
-			javaType="java.util.Date" />
+		<result column="CRE_DATE" property="createDate" />
+		<result column="MOD_DATE" property="modifyDate" />
 	</resultMap>
 	
 	<sql id="search">
@@ -78,12 +76,15 @@
 
 	<update id="memberUpdateOne" parameterType="memberVo">
 		UPDATE MEMBER
-		SET
-		MNAME= #{name}, EMAIL = #{email},
-		PWD = #{password}, MOD_DATE = SYSDATE
+		<set>
+			<if test="email != ''">EMAIL = #{email},</if>
+			<if test="name != ''">MNAME= #{name},</if>
+			<if test="password != ''">PWD = #{password},</if>
+			MOD_DATE = SYSDATE
+		</set>
 		WHERE MNO = #{no}
 	</update>
-
+	
 	<delete id="memberDeleteOne" parameterType="int">
 		DELETE FROM MEMBER
 		WHERE MNO = #{value}
@@ -94,14 +95,6 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 		<include refid="search"></include>
-	</select>
-	
-	<select id="memberSelectDetail" parameterType="int"
-		resultMap="memberResultMap">
-		SELECT MNO, MNAME, EMAIL, CRE_DATE
-		FROM MEMBER
-		WHERE MNO =
-		#{no}
 	</select>
 
 </mapper>
