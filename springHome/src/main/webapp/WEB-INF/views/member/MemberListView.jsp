@@ -17,6 +17,12 @@ table {
 	border-collapse: collapse;
 }
 </style>
+
+<script type="text/javascript">
+// 	function deleteConfirm() {
+// 		return confirm("정말로 삭제하시겠습니까?");
+// 	}
+</script>
 </head>
 
 <body>
@@ -50,17 +56,20 @@ table {
 			<th>이름</th>
 			<th>이메일</th>
 			<th>생성날짜</th>
+			<th>수정</th>
 			<th>삭제</th>
 		</tr>
 		<c:forEach var="memberVo" items="${memberList}">
 			<tr>
 				<td>${memberVo.no}</td>
-				<td><a href='./update.do?no=${memberVo.no}'>${memberVo.name}</a></td>
+				<td><a href='./detail.do?no=${memberVo.no}'>${memberVo.name}</a></td>
 				<td>${memberVo.email}</td>
 				<td><fmt:formatDate value="${memberVo.createDate}"
 						pattern="YYYY-MM-dd hh:mm" />
 				</td>
-				<td><a href='./deleteCtr.do?no=${memberVo.no}'>[삭제]</a></td>
+				<td><a href='./update.do?no=${memberVo.no}'>[수정]</a></td>
+				<td><a href='./deleteCtr.do?no=${memberVo.no}'
+						onclick="deleteConfirm();">[삭제]</a></td>
 			</tr>
 		</c:forEach>
 

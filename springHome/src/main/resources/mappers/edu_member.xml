@@ -70,7 +70,7 @@
 
 	<select id="memberSelectOne" parameterType="int"
 		resultMap="memberResultMap">
-		SELECT MNO, MNAME, EMAIL, CRE_DATE
+		SELECT MNO, MNAME, EMAIL, PWD, CRE_DATE, MOD_DATE
 		FROM MEMBER
 		WHERE MNO =
 		#{no}
@@ -94,6 +94,14 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 		<include refid="search"></include>
+	</select>
+	
+	<select id="memberSelectDetail" parameterType="int"
+		resultMap="memberResultMap">
+		SELECT MNO, MNAME, EMAIL, CRE_DATE
+		FROM MEMBER
+		WHERE MNO =
+		#{no}
 	</select>
 
 </mapper>

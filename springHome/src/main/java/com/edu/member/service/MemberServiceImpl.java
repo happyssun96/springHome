@@ -57,5 +57,11 @@ public class MemberServiceImpl implements MemberService{
 	public int memberSelectTotalCount(String keyword, String searchOption) {
 		
 		return memberDao.memberSelectTotalCount(keyword, searchOption);
+	}
+
+	@Override
+	public MemberVo memberSelectDetail(int no) {
+		
+		return memberDao.memberSelectDetail(no);
 	}	
 }

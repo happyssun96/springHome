@@ -8,8 +8,9 @@
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 <script type="text/javascript">
-	function pageMoveListFnc() {
-		location.href = './list.do';
+
+	function pageMoveBack() {
+		location.href = 'javascript:history.back()';
 	}
 	
 	function pageMoveDeleteFnc(no) {
@@ -23,7 +24,7 @@
 	
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 	
-	<h1>회원정보</h1>
+	<h1>회원정보 수정</h1>
 	
 	<form action="./updateCtr.do" method="post">
 		번호:   <input type="text" name='no' value='${memberVo.no}'
@@ -40,7 +41,7 @@
 			   <input type="button" value="삭제"
 			   		onclick="pageMoveDeleteFnc(${memberVo.no})">
 			   <input type="button" value="뒤로가기" 
-			   		onclick="pageMoveListFnc();">
+			   		onclick="pageMoveBack()">
 	</form>
 	
 	<jsp:include page="/WEB-INF/views/Tail.jsp" />

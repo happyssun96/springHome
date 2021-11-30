@@ -104,6 +104,29 @@ public class MemberController {
 
 		return "member/MemberListView";
 	}
+	
+	// 회원 상세 조회
+	@RequestMapping(value = "/member/detail.do", method = RequestMethod.GET)
+	public String memberDetail(int no, Model model) {
+		logger.info("Welcome MemberController! memberDetail no" + no);
+
+//		List<MemberVo> memberList = memberService.memberSelectDetail(no);
+//		model.addAttribute("memberList", memberList);
+		
+		MemberVo memberVo = memberService.memberSelectOne(no);
+		
+		// 비밀번호 암호화 출력
+		String encryptPassword = "";
+		
+		for (int i = 0; i < memberVo.getPassword().length(); i++) {
+			encryptPassword += "x";
+		}
+
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("encryptPassword",encryptPassword);
+		
+		return "member/MemberDetail";
+	}
 
 	// 회원추가 화면으로
 	@RequestMapping(value = "/member/add.do", method = RequestMethod.GET)
@@ -144,12 +167,13 @@ public class MemberController {
 
 		if (session.getAttribute("member") != null) {
 			MemberVo tempVo = (MemberVo) session.getAttribute("member");
+			// 세션의 값과 새로운 값이 일치하는지 여부
 			if (memberVo.getNo() == tempVo.getNo()) {
 				session.setAttribute("member", 
 						memberService.memberSelectOne(memberVo.getNo()));
 			}
 		}
-		return "redirect:/member/list.do";
+		return "common/successPage";
 	}
 
 	// 회원탈퇴
@@ -165,7 +189,7 @@ public class MemberController {
 			if (memberVo.getNo() == tempVo.getNo()) {
 				
 				session.invalidate();
-				return "redirect:/login.do";
+				return "common/successDeletePage";
 			}
 		}
 		
