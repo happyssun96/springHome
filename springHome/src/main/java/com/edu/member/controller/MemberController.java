@@ -77,10 +77,10 @@ public class MemberController {
 
 		int totalCount = memberService.memberSelectTotalCount(keyword, searchOption);
 
-		// 검색했을 때 1페이지로 넘어가게 구현
-		if ((totalCount / Paging.PAGE_SCALE) < curPage - 1) {
-			curPage = 1;
-		}
+//		// 검색했을 때 1페이지로 넘어가게 구현
+//		if ((totalCount / Paging.PAGE_SCALE) < curPage - 1) {
+//			curPage = 1;
+//		}
 
 		// 페이지 나누기 관련 처리
 		Paging memberPaging = new Paging(totalCount, curPage);
@@ -119,7 +119,7 @@ public class MemberController {
 		String encryptPassword = "";
 		
 		for (int i = 0; i < memberVo.getPassword().length(); i++) {
-			encryptPassword += "x";
+			encryptPassword += "*";
 		}
 
 		model.addAttribute("memberVo", memberVo);

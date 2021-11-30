@@ -19,6 +19,19 @@ table {
 </style>
 
 <script type="text/javascript">
+
+	function searchFunc(){
+	   var curPage = document.getElementById('curPage');
+	   curPage.setAttribute('value', 1);
+
+	   var selectedOption = document.getElementById("searchOption");
+	   var form = document.getElementById('pagingForm');
+	   location.href = './list.do?curPage=' + curPage.value
+	         + '&keyword='+form.keyword.value
+	         + '&searchOption='
+	         + selectedOption.options[selectedOption.selectedIndex].value;
+	}
+
 	function pageMoveDeleteFnc(no) {
 		if(confirm("삭제하시겠습니까?")){
 			alert("삭제를 완료하였습니다!")
@@ -44,7 +57,7 @@ table {
 	</p>
 	
 	<form id='pagingForm' action="./list.do" method="post">
-		<select name='searchOption'>
+		<select name='searchOption' id='searchOption'>
 			<option value="all" ${searchMap.searchOption 
 				== 'all' ? 'selected' : '' }>전체</option>
 			<option value="name" ${searchMap.searchOption 
@@ -53,7 +66,9 @@ table {
 				== 'email' ? 'selected' : '' }>이메일</option>
 		</select>
 		
-		<input type="text" name="keyword" value="${searchMap.keyword}">
+		<input type="text" name="keyword" id="keyword" value="${searchMap.keyword}">
+		
+		<input type="button" value="검색" onclick="searchFunc()">
 		
 		<input type="hidden" id='curPage' name='curPage'
 			value="${pagingMap.memberPaging.curPage}">

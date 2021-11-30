@@ -9,6 +9,17 @@
 <meta charset="UTF-8">
 <title>회원 상세 페이지</title>
 
+<style type="text/css">
+
+table {
+	border-collapse: separate;
+	text-align: center;
+}
+#title {
+	font-weight: bold; 
+}
+</style>
+
 <script type="text/javascript">
 	function pageMoveBack() {
 		location.href = 'javascript:history.back()';
@@ -26,25 +37,38 @@
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 	
 		<h1>${memberVo.name} 회원 상세 페이지</h1>
-		<form action="./update.do" method="get">
-		번호:   <input type="text" name='no' value='${memberVo.no}'
-					readonly="readonly"><br/>
-		이름:   <input type="text" name="name" value="${memberVo.name}" 
-					readonly="readonly"><br/>
-		이메일:  <input type="text" name="email"
-					value="${memberVo.email}" readonly="readonly"><br/>
-		암호:	   <input type="text" name="password" 
-				value="${encryptPassword}" readonly="readonly"><br/>
-		가입일:  
-					${memberVo.createDate}
-					<br/>
-		수정일:   
-					${memberVo.modifyDate}
-					<br/>
-			   
-				<input type="button" value="뒤로가기" 	onclick="history.back()">
-				<input type="submit" value="수정">
-				   		</form>
+	
+		<table border="3" style="text-align:center;">
+		<tr>
+			<td id="title">번호</td>
+			<td>${memberVo.no}</td>
+		</tr>
+		<tr>
+			<td id="title">이름</td>
+			<td>${memberVo.name}</td>
+		</tr>
+		<tr>
+			<td id="title">이메일</td>
+			<td>${memberVo.email}</td>
+		</tr>
+		<tr>
+			<td id="title">암호</td>
+			<td>${encryptPassword}</td>
+		</tr>
+		<tr>
+			<td id="title">가입일</td>
+			<td>${memberVo.createDate}</td>
+		</tr>
+		<tr>
+			<td id="title">수정일</td>
+			<td>${memberVo.modifyDate}</td>
+		</tr>
+		</table><br/>
+
+			<input type="button" value="뒤로가기" 	onclick="history.back()">
+			<input type="button" value="수정" 
+					onclick="location.href='./update.do?no=${memberVo.no}'">
+	
 	<jsp:include page="/WEB-INF/views/Tail.jsp" />
 	
 </body>
